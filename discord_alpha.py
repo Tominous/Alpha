@@ -610,14 +610,14 @@ class Alpha(discord.AutoShardedClient):
 										suspiciousUsers["nickname"].append("{}: {}".format(member.id, str(member.avatar_url)))
 										suspiciousUsers["ids"].append(member.id)
 
-				# hasOnePublicChannel = False
-				# totalUsers = len(guild.members) * 0.9
-				# for channel in guild.channels:
-				# 	if channel.type == discord.ChannelType.text and guild.me.permissions_in(channel).read_messages and guild.me.permissions_in(channel).send_messages and len(channel.members) >= totalUsers:
-				# 		hasOnePublicChannel = True
-				# 		break
-				# if not hasOnePublicChannel and guild.id not in self.alphaSettings["tosWatchlist"]["access"]["whitelist"] and guild.id not in self.alphaSettings["tosWatchlist"]["access"]["blacklist"]:
-				# 	accessWarnings.append("```{} ({})```".format(guild.name, guild.id))
+				 hasOnePublicChannel = False
+				 totalUsers = len(guild.members) * 0.9
+				 for channel in guild.channels:
+				 	if channel.type == discord.ChannelType.text and guild.me.permissions_in(channel).read_messages and guild.me.permissions_in(channel).send_messages and len(channel.members) >= totalUsers:
+				 		hasOnePublicChannel = True
+				 		break
+				 if not hasOnePublicChannel and guild.id not in self.alphaSettings["tosWatchlist"]["access"]["whitelist"] and guild.id not in self.alphaSettings["tosWatchlist"]["access"]["blacklist"]:
+				 	accessWarnings.append("```{} ({})```".format(guild.name, guild.id))
 
 			for oldAvatar in suspiciousUsers["oldWhitelist"]: self.alphaSettings["tosWatchlist"]["avatars"]["whitelist"].remove(oldAvatar)
 			for oldAvatar in suspiciousUsers["oldBlacklist"]: self.alphaSettings["tosWatchlist"]["avatars"]["blacklist"].remove(oldAvatar)
@@ -1332,11 +1332,11 @@ class Alpha(discord.AutoShardedClient):
 					if messageRequest.content == "n help":
 						embed = discord.Embed(title=":newspaper: News", description="Detailed guide with examples is available on [our website](https://www.alphabotsystem.com/guide).", color=constants.colors["gray"])
 						await message.channel.send(embed=embed)
-					# elif messageRequest.content == "n parameters":
-					# 	embed = discord.Embed(title=":chains: News parameters", description="All available news parameters you can use.", color=constants.colors["light blue"])
-					# 	embed.add_field(name=":scales: Filters", value="General, AMA, Announcement, Airdrop, Brand, Burn, Conference, Contest, Exchange, Hard fork, ICO, Regulation, Meetup, Partnership, Release, Soft fork, Swap, Test, Update, Report", inline=False)
-					# 	embed.set_footer(text="Use \"n parameters\" to pull up this list again.")
-					# 	await message.channel.send(embed=embed)
+					 elif messageRequest.content == "n parameters":
+					 	embed = discord.Embed(title=":chains: News parameters", description="All available news parameters you can use.", color=constants.colors["light blue"])
+					 	embed.add_field(name=":scales: Filters", value="General, AMA, Announcement, Airdrop, Brand, Burn, Conference, Contest, Exchange, Hard fork, ICO, Regulation, Meetup, Partnership, Release, Soft fork, Swap, Test, Update, Report", inline=False)
+					 	embed.set_footer(text="Use \"n parameters\" to pull up this list again.")
+					 	await message.channel.send(embed=embed)
 					else:
 						requestSlices = re.split(", n | n |, ", messageRequest.content.split(" ", 1)[1])
 						totalWeight = len(requestSlices)
@@ -1476,7 +1476,7 @@ class Alpha(discord.AutoShardedClient):
 								else: self.rateLimited[messageRequest.authorId] = weight - 2
 						await self.add_tip_message(message, "flow")
 
-						# self.statistics["c"] += totalWeight
+						 self.statistics["c"] += totalWeight
 						await self.finish_request(message, messageRequest, totalWeight, sentMessages)
 				elif messageRequest.content.startswith("stream ") and messageRequest.authorId in [361916376069439490, 164073578696802305, 390170634891689984]:
 					if message.author.bot: return
@@ -1485,8 +1485,8 @@ class Alpha(discord.AutoShardedClient):
 						embed = discord.Embed(title=":abacus: Data Streams", description="Detailed guide with examples is available on [our website](https://www.alphabotsystem.com/guide).", color=constants.colors["light blue"])
 						await message.channel.send(embed=embed)
 
-						# embed.add_field(name=":pencil2: Stream setup", value="```stream set <type>```", inline=False)
-						# embed.add_field(name=":pencil2: Delete data stream", value="```stream delete```", inline=False)
+						 embed.add_field(name=":pencil2: Stream setup", value="```stream set <type>```", inline=False)
+						 embed.add_field(name=":pencil2: Delete data stream", value="```stream delete```", inline=False)
 					else:
 						if messageRequest.is_bronze_guild():
 							requestSlices = re.split(", stream | stream |, ", messageRequest.content.split(" ", 1)[1])
